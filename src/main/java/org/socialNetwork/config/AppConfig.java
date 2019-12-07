@@ -1,6 +1,9 @@
 package org.socialNetwork.config;
 
 import org.socialNetwork.controller.HomeController;
+import org.socialNetwork.controller.UserController;
+import org.socialNetwork.dao.UserDao;
+import org.socialNetwork.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -85,5 +88,20 @@ public class AppConfig implements WebMvcConfigurer {
     @Bean
     public HomeController homeController(){
         return new HomeController();
+    }
+
+    @Bean
+    public UserController userController(){
+        return new UserController();
+    }
+
+    @Bean
+    public UserService userService(){
+        return new UserService();
+    }
+
+    @Bean
+    public UserDao userDao(){
+        return new UserDao();
     }
 }
