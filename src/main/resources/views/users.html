@@ -1,0 +1,27 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+</head>
+<body>
+<div>
+    <table>
+        <thead>
+        <tr>
+            <th:block>Id</th:block>
+            <th:block>FirstName</th:block>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${users.empty}">
+            <td colspan="2"> No Users In DataBase </td>
+        </tr>
+        <tr th:each="user: ${users}">
+            <td th:text="${user.getId()}"></td>
+            <td th:text="${user.getFirstName()}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
