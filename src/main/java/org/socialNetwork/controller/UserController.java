@@ -5,10 +5,7 @@ import org.socialNetwork.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,9 +40,8 @@ public class UserController {
     }
 
     @RequestMapping(path = "/users/new", method = RequestMethod.POST)
-    public String addNewUser(@RequestParam("id") String id,
-                             @RequestParam("firstName") String firstName){
-        users.add(new User(Long.parseLong(id),firstName));
+    public String addNewUser(@ModelAttribute User user){
+        users.add(user);
         return "redirect:/users";
     }
 }
