@@ -4,6 +4,7 @@ import org.socialNetwork.controller.HomeController;
 import org.socialNetwork.controller.UserController;
 import org.socialNetwork.dao.UserDao;
 import org.socialNetwork.service.UserService;
+import org.socialNetwork.util.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -34,7 +35,7 @@ public class AppConfig implements WebMvcConfigurer {
     private ApplicationContext applicationContext;
 
     @Bean
-    public SpringResourceTemplateResolver templateResolver(){
+    public SpringResourceTemplateResolver templateResolver() {
         SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
         templateResolver.setApplicationContext(applicationContext);
         templateResolver.setPrefix("classpath:/views/");
@@ -43,7 +44,7 @@ public class AppConfig implements WebMvcConfigurer {
     }
 
     @Bean
-    public SpringTemplateEngine templateEngine(){
+    public SpringTemplateEngine templateEngine() {
         SpringTemplateEngine templateEngine = new SpringTemplateEngine();
         templateEngine.setTemplateResolver(templateResolver());
         templateEngine.setEnableSpringELCompiler(true);
@@ -53,7 +54,7 @@ public class AppConfig implements WebMvcConfigurer {
     @Override
     public void configureViewResolvers(ViewResolverRegistry registry) {
         ThymeleafViewResolver resolver = new ThymeleafViewResolver();
-        resolver.setTemplateEngine (templateEngine());
+        resolver.setTemplateEngine(templateEngine());
         registry.viewResolver(resolver);
     }
 
@@ -86,22 +87,27 @@ public class AppConfig implements WebMvcConfigurer {
     }
 
     @Bean
-    public HomeController homeController(){
+    public HomeController homeController() {
         return new HomeController();
     }
 
     @Bean
-    public UserController userController(){
+    public UserController userController() {
         return new UserController();
     }
 
     @Bean
-    public UserService userService(){
+    public UserService userService() {
         return new UserService();
     }
 
     @Bean
-    public UserDao userDao(){
+    public UserDao userDao() {
         return new UserDao();
+    }
+
+    @Bean
+    public UserValidator userValidator() {
+        return new UserValidator();
     }
 }

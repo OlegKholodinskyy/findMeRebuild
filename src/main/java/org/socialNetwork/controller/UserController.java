@@ -2,6 +2,7 @@ package org.socialNetwork.controller;
 
 import org.socialNetwork.models.User;
 import org.socialNetwork.service.UserService;
+import org.socialNetwork.util.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +20,9 @@ public class UserController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    UserValidator userValidator;
+
     List<User> users = new ArrayList<>();
 
 
@@ -30,25 +34,26 @@ public class UserController {
         return "index";
     }
 
-    @RequestMapping (path = "/users", method = RequestMethod.GET)
-    public String users(Model model){
+    @RequestMapping(path = "/users", method = RequestMethod.GET)
+    public String users(Model model) {
 
         model.addAttribute("users", users);
         return "users";
     }
 
     @RequestMapping(path = "/users/new", method = RequestMethod.GET)
-    public String newUser(User user){
-    //    model.addAttribute("user", new User());
+    public String newUser(User user) {
         return "newUser";
     }
 
     @RequestMapping(path = "/users/new", method = RequestMethod.POST)
     public String addNewUser(@ModelAttribute @Valid User user,
                              BindingResult bindingResult,
-                             Model model){
-
-        if (bindingResult.hasErrors()){return "newUser";}
+                             Model model) {
+        userValidator.validate(user, bindingResult);
+        if (bindingResult.hasErrors()) {
+            return "newUser";
+        }
         users.add(user);
         return "redirect:/users";
     }
