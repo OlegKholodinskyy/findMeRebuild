@@ -1,10 +1,13 @@
 package org.socialNetwork.models;
 
-/**
- * Created by oleg on 01.12.2019.
- */
+import org.hibernate.validator.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
 public class User {
     private Long id;
+
+    @NotBlank (message = "Name is required")
+    @Size(min=2, max = 20, message = "Name should be from 2 to 20 symbols")
     private String firstName;
 
     public User() {

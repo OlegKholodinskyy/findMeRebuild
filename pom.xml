@@ -46,6 +46,12 @@
         </dependency>
 
         <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>${hibernate.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>com.oracle</groupId>
             <artifactId>ojdbc7</artifactId>
             <version>12.1.0.1</version>
@@ -75,6 +81,7 @@
             <version>3.0.1</version>
             <scope>provided</scope>
         </dependency>
+
     </dependencies>
 
     <build>

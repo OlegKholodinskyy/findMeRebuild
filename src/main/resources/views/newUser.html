@@ -1,4 +1,5 @@
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <title>Find me</title>
 </head>
@@ -8,12 +9,22 @@
 </div>
 
 
-<form action="/users/new" method="post">
-
-    <input name="id" type="text" placeholder="id">
-    <input name="firstName" type="text" placeholder="firstName">
-    <input type="submit">
-
+<form action="#" th:action="@{/users/new}" th:object="${user}" method="post">
+<table>
+    <tr>
+        <td>id</td>
+        <td><input type="text" th:field="*{id}" placeholder="id"></td>
+        <td th:if="${#fields.hasErrors('id')}" th:errors="*{name}">Nameerrors</td>
+    </tr>
+    <tr>
+        <td>firstName</td>
+        <td><input type="text" th:field="*{firstName}" placeholder="firstName"></td>
+        <td th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">Nameerrors</td></p>
+    </tr>
+    <tr>
+        <input type="submit"> <input type="reset">
+    </tr>
+</table>
 </form>
 </body>
 </html>
