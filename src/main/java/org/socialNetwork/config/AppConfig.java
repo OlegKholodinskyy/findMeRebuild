@@ -2,7 +2,7 @@ package org.socialNetwork.config;
 
 import org.socialNetwork.controller.HomeController;
 import org.socialNetwork.controller.UserController;
-import org.socialNetwork.dao.UserDao;
+import org.socialNetwork.dao.JpaUserDaoImpl;
 import org.socialNetwork.service.UserService;
 import org.socialNetwork.util.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +16,7 @@ import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -28,6 +29,7 @@ import javax.persistence.EntityManagerFactory;
 
 @Configuration
 @EnableWebMvc
+@EnableTransactionManagement
 @ComponentScan(basePackages = {"org.socialNetwork"})
 public class AppConfig implements WebMvcConfigurer {
 
@@ -102,8 +104,8 @@ public class AppConfig implements WebMvcConfigurer {
     }
 
     @Bean
-    public UserDao userDao() {
-        return new UserDao();
+    JpaUserDaoImpl jpaUserDaoImpl() {
+        return new JpaUserDaoImpl();
     }
 
     @Bean

@@ -2,17 +2,18 @@ package org.socialNetwork.dao;
 
 import org.socialNetwork.models.User;
 
+import java.util.List;
+
 /**
- * Created by oleg on 07.12.2019.
+ * Created by oleg on 10.12.2019.
  */
-public class UserDao {
+public interface UserDao {
 
-    public User getUser(String userId) {
-        return new User(Long.parseLong(userId),"newUserName");
-    }
+    public List<User> listAll();
 
-    public Object getOne(String firstName) {
-      //todo
-        return new User();
-    }
+    public User getOneById(Long id);
+
+    public User getOneByName(String firstName);
+
+    public User add(User user);
 }

@@ -1,9 +1,14 @@
 package org.socialNetwork.models;
 
 import org.hibernate.validator.constraints.NotBlank;
+
+import javax.persistence.*;
 import javax.validation.constraints.Size;
 
+@Entity
+@Table(name = "USERS")
 public class User {
+
     private Long id;
 
     @NotBlank (message = "Name is required")
@@ -18,6 +23,10 @@ public class User {
         this.firstName = firstName;
     }
 
+    @Id
+    @SequenceGenerator(name = "USER_SEQUENCE", sequenceName = "USER_SEQUENCE", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "USER_SEQUENCE")
+    @Column(name = "ID")
     public Long getId() {
         return id;
     }
@@ -26,6 +35,7 @@ public class User {
         this.id = id;
     }
 
+    @Column(name = "FIRST_NAME")
     public String getFirstName() {
         return firstName;
     }

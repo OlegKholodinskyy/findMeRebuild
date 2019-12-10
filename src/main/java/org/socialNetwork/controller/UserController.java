@@ -23,20 +23,19 @@ public class UserController {
     @Autowired
     UserValidator userValidator;
 
-    List<User> users = new ArrayList<>();
-
 
     @RequestMapping(path = "/user/{userId}", method = RequestMethod.GET)
     public String getUser(Model model, @PathVariable String userId) {
 
-        User user = userService.getUser(userId);
+        Long id = Long.parseLong(userId);
+        User user = userService.getUser(id);
         model.addAttribute("user", user);
         return "index";
     }
 
     @RequestMapping(path = "/users", method = RequestMethod.GET)
     public String users(Model model) {
-
+        List<User> users = userService.listAll();
         model.addAttribute("users", users);
         return "users";
     }
@@ -54,7 +53,7 @@ public class UserController {
         if (bindingResult.hasErrors()) {
             return "newUser";
         }
-        users.add(user);
+        userService.add(user);
         return "redirect:/users";
     }
 }
