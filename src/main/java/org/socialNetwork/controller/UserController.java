@@ -7,12 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class UserController {
@@ -28,7 +27,7 @@ public class UserController {
     public String getUser(Model model, @PathVariable String userId) {
 
         Long id = Long.parseLong(userId);
-        User user = userService.getUser(id);
+        Optional<User> user = userService.getUser(id);
         model.addAttribute("user", user);
         return "index";
     }

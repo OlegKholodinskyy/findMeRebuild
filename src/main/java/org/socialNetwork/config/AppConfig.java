@@ -4,12 +4,14 @@ import org.socialNetwork.controller.HomeController;
 import org.socialNetwork.controller.UserController;
 import org.socialNetwork.dao.JpaUserDaoImpl;
 import org.socialNetwork.service.UserService;
+import org.socialNetwork.service.UserServiceImpl;
 import org.socialNetwork.util.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
@@ -30,6 +32,7 @@ import javax.persistence.EntityManagerFactory;
 @Configuration
 @EnableWebMvc
 @EnableTransactionManagement
+@EnableJpaRepositories("org.socialNetwork.repository")
 @ComponentScan(basePackages = {"org.socialNetwork"})
 public class AppConfig implements WebMvcConfigurer {
 
@@ -66,13 +69,13 @@ public class AppConfig implements WebMvcConfigurer {
         dataSource.setDriverClassName("oracle.jdbc.driver.OracleDriver");
         dataSource.setUrl("jdbc:oracle:thin:@gromcode-lessons.cmbqecodcoqo.us-east-2.rds.amazonaws.com:1521:ORCL");
         dataSource.setUsername("main");
-        dataSource.setPassword("");
+        dataSource.setPassword("24390000");
         return dataSource;
     }
 
 
     @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactoryBean() {
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean en = new LocalContainerEntityManagerFactoryBean();
         en.setDataSource(dataSource());
         en.setPackagesToScan(new String[]{"org.socialNetwork"});
@@ -88,28 +91,29 @@ public class AppConfig implements WebMvcConfigurer {
         return transactionManager;
     }
 
-    @Bean
-    public HomeController homeController() {
-        return new HomeController();
-    }
+//    @Bean
+//    public HomeController homeController() {
+//        return new HomeController();
+//    }
+//
+//    @Bean
+//    public UserController userController() {
+//        return new UserController();
+//    }
+//
+//    @Bean
+//    public UserService userService() {
+//        return new UserServiceImpl();
+//    }
+//
+//    @Bean
+//    JpaUserDaoImpl jpaUserDaoImpl() {
+//        return new JpaUserDaoImpl();
+//    }
+//
+//    @Bean
+//    public UserValidator userValidator() {
+//        return new UserValidator();
+//    }
 
-    @Bean
-    public UserController userController() {
-        return new UserController();
-    }
-
-    @Bean
-    public UserService userService() {
-        return new UserService();
-    }
-
-    @Bean
-    JpaUserDaoImpl jpaUserDaoImpl() {
-        return new JpaUserDaoImpl();
-    }
-
-    @Bean
-    public UserValidator userValidator() {
-        return new UserValidator();
-    }
 }

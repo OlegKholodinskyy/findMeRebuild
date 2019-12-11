@@ -5,8 +5,13 @@ import org.socialNetwork.models.User;
 import javax.persistence.*;
 import javax.transaction.Transactional;
 import java.util.List;
+/*
+Робота з Базою Даних винесена в пакет repository.
+_________________________________________________
+Даниий клас використовувася для ознайомлення з роботою EntityManager
+____________________________________________________________________
+ */
 
-@Transactional
 public class JpaUserDaoImpl implements UserDao {
 
 
@@ -15,7 +20,6 @@ public class JpaUserDaoImpl implements UserDao {
 
 
     private String getAllQuery = "SELECT * FROM USERS";
- //   private String getOneByIdQuery = "SELECT U FROM USER U WHERE U.ID=:ID";
     private String getOneByFirstNameQuery = "SELECT * FROM USERS WHERE FIRST_NAME=?";
 
     @Override

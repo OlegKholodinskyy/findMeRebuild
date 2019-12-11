@@ -4,9 +4,6 @@ import org.socialNetwork.models.User;
 
 import java.util.List;
 
-/**
- * Created by oleg on 10.12.2019.
- */
 public interface UserDao {
 
     public List<User> listAll();
